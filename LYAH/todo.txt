@@ -1,0 +1,4 @@
+find the light sabre
+learn haskell
+learn yesod
+program notiphi
