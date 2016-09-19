@@ -29,13 +29,19 @@ mapOkay = if mapTree (+1) testTree' == mapExpected
           else error "test failed!"
 
 preorder :: BinaryTree a -> [a]
-preorder = undefined
+preorder t = go t []
+  where go Leaf                l = l
+        go (Node left n right) l = n:go left (go right l)
 
 inorder :: BinaryTree a -> [a]
-inorder = undefined
+inorder t = go t []
+  where go Leaf                l = l
+        go (Node left n right) l = go left (n:go right l)
 
 postorder :: BinaryTree a -> [a]
-postorder = undefined
+postorder t = go t []
+  where go Leaf                l = l
+        go (Node left n right) l = go left (go right (n:l))
 
 testTree :: BinaryTree Integer
 testTree = Node (Node Leaf 1 Leaf) 2 (Node Leaf 3 Leaf)
@@ -63,3 +69,12 @@ main = do
   testPreorder
   testInorder
   testPostorder
+
+foldTree :: (a -> b -> b) -> b -> BinaryTree a -> b
+foldTree _ acc Leaf =  acc
+foldTree f acc (Node left n right) = f n (foldTree f (foldTree f acc right) left)
+
+isSubSequenceOf :: (Eq a) => [a] -> [a] -> Bool
+isSubSequenceOf []       _        = True
+isSubSequenceOf _        []       = False
+isSubSequenceOf (x:xs) b = x `elem` b && isSubSequenceOf xs b
