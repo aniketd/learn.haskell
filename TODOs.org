@@ -1,0 +1,5 @@
+* TODO
+* TODO Ex. from `Testing`
+* TODO Ex. from `Monoid, Semigroup`
+* TODO Ex. from `Functor`
+* TODO Ex. from `Applicative`
